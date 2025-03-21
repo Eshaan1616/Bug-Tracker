@@ -1,0 +1,72 @@
+<div class="container table-responsive">
+    <div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+        <div>
+            <div>
+                <button class="btn btn-sm btn-primary float-end mb-3" (click)="openVerticallyCentered(content)">Add Entry</button>
+            </div>
+            <table class="table table-bordered table-dark mx-4">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Username</th>
+                        <th>Phone Number</th> <!-- New column -->
+                        <th>Email</th> <!-- New column -->
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users">
+                        <td>{{user.id}}</td>
+                        
+                        <td>{{user.username}}</td>
+                        
+                        <td>{{user.phoneNumber}}</td>
+                        
+                        <td>{{user.email}}</td>
+
+                        <td>
+                            <div class="d-flex">
+                                <button class="btn btn-sm btn-primary"  (click)="getuserDetails(user.id, content)">Edit</button>
+                                <button class="btn btn-sm btn-danger ms-2" (click)="deleteUser(user.id)">Delete</button>
+                            </div>
+                        </td>
+                    </tr> 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Ng  Bootstrap Modal Popup -->
+<ng-template #content let-modal>
+    <!-- Form for adding user entry -->
+    <form (submit)="submitUserForm()">
+        <div class="modal-header">
+            <h4 class="modal-title" *ngIf="!enableEdit">Add User Entry</h4>
+            <h4 class="modal-title" *ngIf="enableEdit">Edit User Entry</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group mb-3">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" [(ngModel)]="newUser.username"
+                    name="username" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="phoneNumber">Phone NUmber:</label>
+                <input type="text" class="form-control" id="phoneNumber" [(ngModel)]="newUser.phoneNumber"
+                 name="phoneNumber" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="email">Email:</label>
+                <input type="text" class="form-control" id="email" [(ngModel)]="newUser.email"
+                    name="email" required>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary float-end" *ngIf="!enableEdit">Save</button>
+            <button type="submit" class="btn btn-primary float-end" *ngIf="enableEdit">Update</button>
+        </div>
+    </form>
+</ng-template>

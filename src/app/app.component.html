@@ -1,0 +1,31 @@
+<div class="d-flex" style="min-height: 100vh;" *ngIf="isLoggedIn">
+  <div class="bg-primary" style="width: 20%;">
+    <ul class="list-group">
+      <li class="list-group-item">
+       <a routerLink="/dashboard" class="text-white text-decoration-none">Dashboard</a> 
+      </li>
+      <li class="list-group-item">
+        <a class="text-white text-decoration-none" routerLink="/user-panel">
+          User Panel
+        </a>
+      </li>
+      <li class="list-group-item"  routerLink="/bug-panel">
+        <a class="text-white text-decoration-none">
+          Bug Panel
+        </a>
+      </li>
+      <li class="list-group-item"  routerLink="/login-a">
+        <a class="text-white text-decoration-none">
+          Logout
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div  style="width: 80%;">
+     <router-outlet></router-outlet>
+  </div>
+</div>
+
+<div *ngIf="!isLoggedIn">
+  <router-outlet></router-outlet>
+</div>
